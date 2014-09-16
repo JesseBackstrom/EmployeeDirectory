@@ -33,8 +33,7 @@ namespace EmployeeDirectory
                     System.Web.Security.FormsIdentity id;
                     id = (System.Web.Security.FormsIdentity)HttpContext.Current.User.Identity;
                     String[] myRoles = new String[2];
-                    myRoles[0] = "Employee";
-                    myRoles[1] = "HR";
+                    myRoles[0] = id.Ticket.UserData;
                     HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(id, myRoles);
                 }
             }

@@ -36,7 +36,7 @@ namespace EmployeeDirectory.Account
         {
             if (LoginService.isUniqueID(long.Parse(txtEmployeeId.Text)))
             {
-                LoginService.CreateUserRequest(txtFirstname.Text, txtLastName.Text, long.Parse(txtEmployeeId.Text), int.Parse(ddlRole.SelectedValue), int.Parse(ddlLocation.SelectedValue), txtEmail.Text);
+                LoginService.updateUser(txtFirstname.Text, txtLastName.Text, long.Parse(txtEmployeeId.Text), int.Parse(ddlRole.SelectedValue), int.Parse(ddlLocation.SelectedValue), txtEmail.Text, 3);
                 pnlForm.Visible = false;
                 pnlMessage.Visible = true;
 

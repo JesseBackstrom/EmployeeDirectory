@@ -1,15 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Error.aspx.cs" Inherits="EmployeeDirectory.Error" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Error.aspx.cs" Inherits="EmployeeDirectory.Error" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Application Error</title>
-</head>
-<body>
-    <div>
-    <h2>The application has encountered an error.</h2>
-        <asp:Label ID="lblError" runat="server" />
-    </div>
-</body>
-</html>
+
+
+<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h2>The application has experienced an error.</h2>
+            </hgroup>
+            <p>
+                <asp:Button ID="btnLink" OnClick="navigate" text="Return to Search Page." runat="server" />
+            </p>
+        </div>
+    </section>
+</asp:Content>
