@@ -23,16 +23,33 @@ namespace EmployeeDirectory.Account
         }
         protected void btnLogin(object sender, EventArgs e)
         {
-            bool valid = LoginService.AuthenticateUser(Email.Text, Password.Text);
-            if (valid)
-            {
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(Email.Text, false, 10);
-                string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                cookie.HttpOnly = true;
-                Response.Cookies.Add(cookie);
+            //use the service to authenticate
+            User currentUser = LoginService.AuthenticateUser(long.Parse(txtEmployeeId.Text), Password.Text);
 
-                Response.Redirect(FormsAuthentication.GetRedirectUrl(Email.Text, false));
+            if ((currentUser != null)& (currentUser.Status.Equals("Active")))
+            {
+                //check to see if the account is active
+                if (currentUser.Status.Equals("Pending") | currentUser.Status.Equals("Inactive"))
+                    FailureText.Text = "Your account is either pending, or inactive. Please contact HR.";
+
+                else
+                {
+                    //create and add the forms authentication ticket
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                        1, currentUser.FirstName, DateTime.Now, DateTime.Now.AddSeconds(Session.Timeout), false, currentUser.Role);
+                    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    cookie.HttpOnly = true;
+                    Response.Cookies.Add(cookie);
+
+                    // send to default page
+
+                    Response.Redirect(FormsAuthentication.GetRedirectUrl(txtEmployeeId.Text, false));
+                }
+            }
+            else
+            {
+                    FailureText.Text = "Invalid Credentials.";
             }
         }
     }

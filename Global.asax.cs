@@ -11,11 +11,11 @@ namespace EmployeeDirectory
 {
     public class Global : HttpApplication
     {
+
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterOpenAuth();
         }
 
         void Application_End(object sender, EventArgs e)
@@ -24,10 +24,28 @@ namespace EmployeeDirectory
 
         }
 
+        public void Application_AuthenticateRequest(Object src, EventArgs e)
+        {
+            if (!(HttpContext.Current.User == null))
+            {
+                if (HttpContext.Current.User.Identity.AuthenticationType == "Forms")
+                {
+                    System.Web.Security.FormsIdentity id;
+                    id = (System.Web.Security.FormsIdentity)HttpContext.Current.User.Identity;
+                    String[] myRoles = new String[2];
+                    myRoles[0] = "Employee";
+                    myRoles[1] = "HR";
+                    HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(id, myRoles);
+                }
+            }
+        }
+
         void Application_Error(object sender, EventArgs e)
         {
+            
             Exception exc = Server.GetLastError();
-            Server.Transfer("~/Error.aspx");
+            string ex = exc.Message;
+            //Server.Transfer("~/Error.aspx");
 
         }
     }

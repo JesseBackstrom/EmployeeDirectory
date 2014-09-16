@@ -1,7 +1,7 @@
 ﻿USE [DB_Employee_Directory]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_GetPW]    Script Date: 9/16/2014 8:34:04 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_EmployeeIdIsUnique]    Script Date: 9/16/2014 8:33:04 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,12 +10,15 @@ GO
 
 
 
+
+
+
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[SP_GetPW]
+CREATE PROCEDURE [dbo].[SP_EmployeeIdIsUnique]
 	-- Add the parameters for the stored procedure here
 	@Employee_ID bigint
 AS
@@ -25,17 +28,12 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT EmpPassword, FirstName, LastName, Employee_ID, Role.Role, Location.Location, Email, Status.Status 
-	from Employee Join Role on Employee.Role = Role.Id 
-	join Status on Employee.Status = Status.Id
-	join Location on Employee.Location = Location.Id
-	where Employee.Employee_ID = @Employee_ID
+	Select Employee_ID from Employee where Employee_ID = @Employee_ID
 END
 
 
 
+
+
+
 GO
-
-
-
-

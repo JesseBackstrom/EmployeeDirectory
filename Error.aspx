@@ -8,7 +8,8 @@
 </head>
 <body>
     <div>
-    The application has encountered an error.
+    <h2>The application has encountered an error.</h2>
+        <asp:Label ID="lblError" runat="server" />
     </div>
 </body>
 </html>

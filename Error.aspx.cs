@@ -11,7 +11,7 @@ namespace EmployeeDirectory
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //display the stored error message
         }
     }
 }

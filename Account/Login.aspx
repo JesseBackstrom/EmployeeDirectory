@@ -14,9 +14,11 @@
                     <legend>Log in Form</legend>
                     <ol>
                         <li>
-                            <asp:Label runat="server" AssociatedControlID="Email">Email</asp:Label>
-                            <asp:TextBox runat="server" ID="Email" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" CssClass="field-validation-error" ErrorMessage="The user name field is required." />
+                            <asp:Label runat="server" AssociatedControlID="txtEmployeeId">Employee ID</asp:Label>
+                            <asp:TextBox runat="server" ID="txtEmployeeId" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployeeId" CssClass="field-validation-error" ErrorMessage="The user name field is required." />
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" CssClass="field-validation-error" ControlToValidate="txtEmployeeId" runat="server" ErrorMessage="Only Numbers Are Allowed" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+               
                         </li>
                         <li>
                             <asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
