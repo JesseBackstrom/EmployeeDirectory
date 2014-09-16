@@ -48,10 +48,8 @@ namespace EmployeeDirectory.Business
                 return false;
         }
 
-        public static void CreateUserRequest(string FirstName, string LastName, long Employee_ID, int Role, int Location, string email)
+        public static void updateUser(string FirstName, string LastName, long Employee_ID, int Role, int Location, string email, int Status)
         {
-            // this status indicates a requested account, not a confirmed one
-            int Status = 3;
 
             //setup the connection
             string connString = ConfigurationManager.ConnectionStrings["EmpDirConn"].ConnectionString;
@@ -74,6 +72,24 @@ namespace EmployeeDirectory.Business
             EmployeeDatabaseConn.Close();
         }
 
+        public static void UpdatePassword(string password, long Employee_Id)
+        {
+            //setup the connection
+            string connString = ConfigurationManager.ConnectionStrings["EmpDirConn"].ConnectionString;
+            SqlConnection EmployeeDatabaseConn = new SqlConnection(connString);
+
+            //select the stored procedure and add parameters
+            SqlCommand cmd = new SqlCommand("SP_UpdatePassword", EmployeeDatabaseConn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Employee_ID", SqlDbType.BigInt).Value = Employee_Id;
+            cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
+
+            //open the connection, execute
+            EmployeeDatabaseConn.Open();
+            cmd.ExecuteNonQuery();
+            EmployeeDatabaseConn.Close();
+        }
+
         public static User AuthenticateUser(long ID, string password)
         {
             //Checks the database to see if the given email/password matches any available records
@@ -85,7 +101,7 @@ namespace EmployeeDirectory.Business
             SqlConnection EmployeeDatabaseConn = new SqlConnection(connString);
 
             //select the stored procedure and add parameters
-            SqlCommand cmd = new SqlCommand("SP_GetPW", EmployeeDatabaseConn);
+            SqlCommand cmd = new SqlCommand("SP_GetEmployee", EmployeeDatabaseConn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@Employee_ID", SqlDbType.BigInt).Value = ID;
 
@@ -98,7 +114,8 @@ namespace EmployeeDirectory.Business
             User currentUser = new User();
             while (reader.Read())
             {
-                data = (byte[])reader["EmpPassword"];
+                if (!(reader["EmpPassword"] is DBNull))
+                    data = (byte[])reader["EmpPassword"];
                 currentUser.Role = (string)reader["Role"];
                 currentUser.Status = (string)reader["Status"];
                 currentUser.FirstName = (string)reader["FirstName"];
@@ -118,8 +135,8 @@ namespace EmployeeDirectory.Business
                 else
                     return null;
             }
-            else
-                return null;
+
+            return currentUser;
 
 
         }

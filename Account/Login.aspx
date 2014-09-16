@@ -15,7 +15,7 @@
                     <ol>
                         <li>
                             <asp:Label runat="server" AssociatedControlID="txtEmployeeId">Employee ID</asp:Label>
-                            <asp:TextBox runat="server" ID="txtEmployeeId" />
+                            <asp:TextBox runat="server" ID="txtEmployeeId" TextMode="Number"/>
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployeeId" CssClass="field-validation-error" ErrorMessage="The user name field is required." />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" CssClass="field-validation-error" ControlToValidate="txtEmployeeId" runat="server" ErrorMessage="Only Numbers Are Allowed" ValidationExpression="\d+"></asp:RegularExpressionValidator>
                

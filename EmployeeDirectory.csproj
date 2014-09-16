@@ -193,7 +193,12 @@
     <Content Include="Content\Images\orderedList8.png" />
     <Content Include="Content\Images\orderedList9.png" />
     <Content Include="Data\Generator.sql" />
-    <Content Include="Data\SP_GetPW.sql" />
+    <Content Include="Data\SP_EmployeeIdIsUnique.sql" />
+    <Content Include="Data\SP_GetLocations.sql" />
+    <Content Include="Data\SP_GetEmployee.sql" />
+    <Content Include="Data\SP_GetRoles.sql" />
+    <Content Include="Data\SP_UpdateAccount.sql" />
+    <Content Include="Data\SP_UpdatePassword.sql" />
     <Content Include="Error.aspx" />
     <Content Include="packages.config" />
     <Content Include="Account\Web.config" />
@@ -262,6 +267,7 @@
     </Compile>
     <Compile Include="Business\LoginService.cs" />
     <Compile Include="Business\PopulateFormService.cs" />
+    <Compile Include="Business\SearchService.cs" />
     <Compile Include="Business\User.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

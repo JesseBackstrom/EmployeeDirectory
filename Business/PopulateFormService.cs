@@ -75,5 +75,36 @@ namespace EmployeeDirectory.Business
             return results;
 
         }
+
+        public static DataTable getStatuses()
+        {
+            //returns a datatable containing the Statuses from the database
+
+            DataTable results = new DataTable();
+            results.Columns.Add("Value");
+            results.Columns.Add("Text");
+
+            //setup the connection
+            string connString = ConfigurationManager.ConnectionStrings["EmpDirConn"].ConnectionString;
+            SqlConnection EmployeeDatabaseConn = new SqlConnection(connString);
+
+            //select the stored procedure and add parameters
+            SqlCommand cmd = new SqlCommand("SP_GetStatuses", EmployeeDatabaseConn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //open the connection, execute, and convert to the necessary format
+            EmployeeDatabaseConn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                results.Rows.Add(reader[0], reader[1]);
+            }
+
+            EmployeeDatabaseConn.Close();
+
+            return results;
+
+        }
     }
 }
