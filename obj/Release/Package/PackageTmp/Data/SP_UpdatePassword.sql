@@ -1,12 +1,13 @@
-﻿USE [DB_Employee_Directory]
+USE [DB_Employee_Directory]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_UpdateAccount]    Script Date: 9/16/2014 9:09:52 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_UpdatePassword]    Script Date: 9/17/2014 10:46:14 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -19,7 +20,7 @@ CREATE PROCEDURE [dbo].[SP_UpdatePassword]
 	-- Add the parameters for the stored procedure here
 
 	@Employee_ID bigint,
-	@Password binary(16)
+	@Password varchar(32)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -29,11 +30,14 @@ BEGIN
 	Begin
 		UPDATE [dbo].[Employee]
 		Set
-			EmpPassword = @Password
+			EmpPassword = Hashbytes('MD5', @Password),
+			Status = 1
 		where
 			Employee_ID = @Employee_ID
 	END
 END
 
 
+
 GO
+

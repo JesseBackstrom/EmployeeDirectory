@@ -1,7 +1,7 @@
 ﻿USE [DB_Employee_Directory]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_EmployeeIdIsUnique]    Script Date: 9/16/2014 8:33:04 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_EmployeeIdIsUnique]    Script Date: 9/17/2014 10:41:36 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -30,6 +30,7 @@ BEGIN
     -- Insert statements for procedure here
 	Select Employee_ID from Employee where Employee_ID = @Employee_ID
 END
+
 
 
 

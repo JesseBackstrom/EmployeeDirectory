@@ -1,7 +1,7 @@
 ﻿USE [DB_Employee_Directory]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_GetPW]    Script Date: 9/16/2014 8:34:04 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_GetEmployee]    Script Date: 9/17/2014 10:42:14 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,12 +10,13 @@ GO
 
 
 
+
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[SP_GetPW]
+CREATE PROCEDURE [dbo].[SP_GetEmployee]
 	-- Add the parameters for the stored procedure here
 	@Employee_ID bigint
 AS
@@ -34,7 +35,6 @@ END
 
 
 
-GO
 
 
 

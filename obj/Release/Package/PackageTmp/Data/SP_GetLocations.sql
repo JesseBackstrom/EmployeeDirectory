@@ -1,7 +1,7 @@
-﻿USE [DB_Employee_Directory]
+USE [DB_Employee_Directory]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_GetLocations]    Script Date: 9/16/2014 8:34:45 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_GetLocations]    Script Date: 9/17/2014 10:43:56 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -31,5 +31,4 @@ END
 
 
 GO
-
 

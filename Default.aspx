@@ -48,9 +48,6 @@
                     <td>
                         <asp:Label runat="server" ID="Label6">Role:</asp:Label>
                     </td>
-                    <td>
-                        <asp:Label runat="server" ID="Label7">Status:</asp:Label>
-                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -59,7 +56,14 @@
                     <td>
                         <asp:DropDownList runat="server" ID="ddlRole"></asp:DropDownList>
                     </td>
-                    <td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label runat="server" ID="Label7">Status:</asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         <asp:DropDownList runat="server" ID="ddlStatus"></asp:DropDownList>
                     </td>
                 </tr>
