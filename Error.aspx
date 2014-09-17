@@ -10,6 +10,7 @@
                 <h2>The application has experienced an error.</h2>
             </hgroup>
             <p>
+                <asp:Label ID="lblError" runat ="server" />
                 <asp:Button ID="btnLink" OnClick="navigate" text="Return to Search Page." runat="server" />
             </p>
         </div>

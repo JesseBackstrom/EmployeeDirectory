@@ -11,7 +11,7 @@ namespace EmployeeDirectory
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            lblError.Text = (string)Session["error"];
         }
         protected void navigate(object sender, EventArgs e)
         {

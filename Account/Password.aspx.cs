@@ -18,12 +18,20 @@ namespace EmployeeDirectory.Account
 
         protected void CreatePassword(object sender, EventArgs e)
         {
-            //saves the password for the user
+            try
+            {
+                //saves the password for the user
 
-            User currentUser = (User)Session["User"];
-            LoginService.UpdatePassword(txtPassword.Text, currentUser.Employee_Id);
-            pnlForm.Visible = false;
-            pnlMessage.Visible = true;
+                User currentUser = (User)Session["User"];
+                LoginService.UpdatePassword(txtPassword.Text, currentUser.Employee_Id);
+                pnlForm.Visible = false;
+                pnlMessage.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Session["error"] = ex.Message;
+                Response.Redirect("~/Error.aspx");
+            }  
 
         }
 

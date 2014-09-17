@@ -16,17 +16,18 @@ namespace EmployeeDirectory.Business
     {
         private static string ConvertMD5(string input)
         {
-            // Encrypt a given string with Md5
-            MD5 md5Hash = MD5.Create();
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
+            
+                // Encrypt a given string with Md5
+                MD5 md5Hash = MD5.Create();
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
 
-            // return the hex
-            return sBuilder.ToString();
+                // return the hex
+                return sBuilder.ToString();
         }
 
         public static bool isUniqueID(long ID)
