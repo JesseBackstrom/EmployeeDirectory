@@ -6,7 +6,7 @@
         <h1><%: Title %>.</h1>
     </hgroup>
     <section id="loginForm">
-        <h2>Use a local account to log in.</h2>
+        <h4>If your account is pending, you will be sent to another page to confirm your password.</h4>
                 <p class="validation-summary-errors">
                     <asp:Literal runat="server" ID="FailureText" />
                 </p>
