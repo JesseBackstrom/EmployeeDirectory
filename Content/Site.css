@@ -412,7 +412,7 @@ fieldset {
 
     textarea {
         font-family: inherit;
-        width: 500px;
+        width: 5000px;
     }
     
         input:focus, textarea:focus {
@@ -694,6 +694,7 @@ tr.pager td {
         width: 90%;
     }
 
+    
     
     
     /* login page */

@@ -14,14 +14,20 @@ namespace EmployeeDirectory.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             //Set Up Controls
+            ListItem blank = new ListItem("", "0");
+
+            ddlLocation.Items.Add(blank);
             ddlLocation.DataSource = PopulateFormService.getLocations();
             ddlLocation.DataValueField = "Value";
             ddlLocation.DataTextField = "Text";
+            ddlLocation.AppendDataBoundItems = true;
             ddlLocation.DataBind();
 
+            ddlRole.Items.Add(blank);
             ddlRole.DataSource = PopulateFormService.getRoles();
             ddlRole.DataValueField = "Value";
             ddlRole.DataTextField = "Text";
+            ddlRole.AppendDataBoundItems = true;
             ddlRole.DataBind();
 
             if (User.IsInRole("HR"))

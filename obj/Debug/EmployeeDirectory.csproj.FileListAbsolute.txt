@@ -25,6 +25,5 @@ c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\Empl
 c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\bin\DotNetOpenAuth.OpenId.xml
 c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\bin\DotNetOpenAuth.AspNet.xml
-c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\obj\Debug\EmployeeDirectory.csprojResolveAssemblyReference.cache
 c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\obj\Debug\EmployeeDirectory.dll
 c:\users\jbackstrom\documents\visual studio 2012\Projects\EmployeeDirectory\EmployeeDirectory\obj\Debug\EmployeeDirectory.pdb

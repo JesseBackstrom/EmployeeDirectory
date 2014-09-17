@@ -68,35 +68,98 @@ namespace EmployeeDirectory
         }
         public void rowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            gvEmployee.EditIndex = -1;
+
             GridViewRow row = gvEmployee.Rows[e.RowIndex];
             
             LoginService.updateUser(((TextBox)(row.Cells[2].Controls[0])).Text,
                 ((TextBox)(row.Cells[3].Controls[0])).Text,
-                long.Parse((((TextBox)(row.Cells[4].Controls[0])).Text)),
-                SearchService.getRoleID(((TextBox)(row.Cells[5].Controls[0])).Text),
-                SearchService.getLocationID(((TextBox)(row.Cells[6].Controls[0])).Text),
-                ((TextBox)(row.Cells[7].Controls[0])).Text,
-                SearchService.getStatusID(((TextBox)(row.Cells[8].Controls[0])).Text));
+                long.Parse(row.Cells[1].Text),
+                Convert.ToInt32((row.FindControl("ddlTRole") as DropDownList).SelectedValue),
+                Convert.ToInt32((row.FindControl("ddlTLocation") as DropDownList).SelectedValue),
+                ((TextBox)(row.Cells[4].Controls[0])).Text,
+                
+                Convert.ToInt32((row.FindControl("ddlTStatus") as DropDownList).SelectedValue));
             search();
         }
         public void gridBinding(object sender, GridViewRowEventArgs e)
         {
+
+            
+
             if (!this.User.IsInRole("HR"))
             {
                 e.Row.Cells[0].Visible = false;
             }
-            
-            if ((e.Row.RowType == DataControlRowType.DataRow) & (e.Row.RowState != DataControlRowState.Edit))
+
+            if ((e.Row.RowType == DataControlRowType.DataRow) & !((e.Row.RowState & DataControlRowState.Edit) > 0))
             {
-                e.Row.Cells[5].Text = SearchService.getRole(Convert.ToInt32(e.Row.Cells[5].Text));
-                e.Row.Cells[6].Text = SearchService.getLocation(Convert.ToInt32(e.Row.Cells[6].Text));
-                e.Row.Cells[8].Text = SearchService.getStatus(Convert.ToInt32(e.Row.Cells[8].Text));
+                //e.Row.Cells[6].Text = SearchService.getRole(Convert.ToInt32(e.Row.Cells[6].Text));
+                //e.Row.Cells[5].Text = SearchService.getLocation(Convert.ToInt32(e.Row.Cells[5].Text));
+                //e.Row.Cells[7].Text = SearchService.getStatus(Convert.ToInt32(e.Row.Cells[7].Text));
+
+                DropDownList ddlTLocation = (e.Row.FindControl("ddlTLocation") as DropDownList);
+                ddlTLocation.DataSource = PopulateFormService.getLocations();
+                ddlTLocation.DataValueField = "Value";
+                ddlTLocation.DataTextField = "Text";
+                ddlTLocation.DataBind();
+                Label lblLocation = (e.Row.FindControl("lblLocation") as Label);
+                ddlTLocation.Items.FindByValue(lblLocation.Text).Selected = true;
+                ddlTLocation.Enabled = false;
+
+                DropDownList ddlTRole = (e.Row.FindControl("ddlTRole") as DropDownList);
+                ddlTRole.DataSource = PopulateFormService.getRoles();
+                ddlTRole.DataValueField = "Value";
+                ddlTRole.DataTextField = "Text";
+                ddlTRole.DataBind();
+                Label lblRole = (e.Row.FindControl("lblRole") as Label);
+                ddlTRole.Items.FindByValue(lblRole.Text).Selected = true;
+                ddlTRole.Enabled = false;
+
+                DropDownList ddlTStatus = (e.Row.FindControl("ddlTStatus") as DropDownList);
+                ddlTStatus.DataSource = PopulateFormService.getStatuses();
+                ddlTStatus.DataValueField = "Value";
+                ddlTStatus.DataTextField = "Text";
+                ddlTStatus.DataBind();
+                Label lblStatus = (e.Row.FindControl("lblStatus") as Label);
+                ddlTStatus.Items.FindByValue(lblStatus.Text).Selected = true;
+                ddlTStatus.Enabled = false;
+
             }
-            if (e.Row.RowState == DataControlRowState.Edit)
+            if ((e.Row.RowState & DataControlRowState.Edit) > 0)
             {
-                ((TextBox)(e.Row.Cells[5].Controls[0])).Text = SearchService.getRole(Convert.ToInt32(((TextBox)(e.Row.Cells[5].Controls[0])).Text));
-                ((TextBox)(e.Row.Cells[6].Controls[0])).Text = SearchService.getLocation(Convert.ToInt32(((TextBox)(e.Row.Cells[6].Controls[0])).Text));
-                ((TextBox)(e.Row.Cells[8].Controls[0])).Text = SearchService.getStatus(Convert.ToInt32(((TextBox)(e.Row.Cells[8].Controls[0])).Text));
+                ((TextBox)(e.Row.Cells[2].Controls[0])).Width = 100;
+                ((TextBox)(e.Row.Cells[3].Controls[0])).Width = 100;
+                ((TextBox)(e.Row.Cells[4].Controls[0])).Width = 100;
+                //((TextBox)(e.Row.Cells[5].Controls[0])).Text = SearchService.getLocation(Convert.ToInt32(((TextBox)(e.Row.Cells[5].Controls[0])).Text));
+                //((TextBox)(e.Row.Cells[7].Controls[0])).Text = SearchService.getStatus(Convert.ToInt32(((TextBox)(e.Row.Cells[7].Controls[0])).Text));                
+
+                DropDownList ddlTLocation = (e.Row.FindControl("ddlTLocation") as DropDownList);
+                ddlTLocation.DataSource = PopulateFormService.getLocations();
+                ddlTLocation.DataValueField = "Value";
+                ddlTLocation.DataTextField = "Text";
+                ddlTLocation.DataBind();
+                Label lblLocation = (e.Row.FindControl("lblLocation") as Label);
+                ddlTLocation.Items.FindByValue(lblLocation.Text).Selected = true;
+                ddlTLocation.Enabled = true;
+
+                DropDownList ddlTRole = (e.Row.FindControl("ddlTRole") as DropDownList);
+                ddlTRole.DataSource = PopulateFormService.getRoles();
+                ddlTRole.DataValueField = "Value";
+                ddlTRole.DataTextField = "Text";
+                ddlTRole.DataBind();
+                Label lblRole = (e.Row.FindControl("lblRole") as Label);
+                ddlTRole.Items.FindByValue(lblRole.Text).Selected = true;
+                ddlTRole.Enabled = true;
+
+                DropDownList ddlTStatus = (e.Row.FindControl("ddlTStatus") as DropDownList);
+                ddlTStatus.DataSource = PopulateFormService.getStatuses();
+                ddlTStatus.DataValueField = "Value";
+                ddlTStatus.DataTextField = "Text";
+                ddlTStatus.DataBind();
+                Label lblStatus = (e.Row.FindControl("lblStatus") as Label);
+                ddlTStatus.Items.FindByValue(lblStatus.Text).Selected = true;
+                ddlTStatus.Enabled = true;
             }
 
         }
