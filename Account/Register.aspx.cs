@@ -30,18 +30,14 @@ namespace EmployeeDirectory.Account
             ddlRole.AppendDataBoundItems = true;
             ddlRole.DataBind();
 
-            if (User.IsInRole("HR"))
-            {
-            }
-            else
-            {
-            }
         }
 
         protected void RegisterUser(object sender, EventArgs e)
         {
+            //check to make sure it's a unique id
             if (LoginService.isUniqueID(long.Parse(txtEmployeeId.Text)))
             {
+                //this is a new user
                 LoginService.updateUser(txtFirstname.Text, txtLastName.Text, long.Parse(txtEmployeeId.Text), int.Parse(ddlRole.SelectedValue), int.Parse(ddlLocation.SelectedValue), txtEmail.Text, 3);
                 pnlForm.Visible = false;
                 pnlMessage.Visible = true;

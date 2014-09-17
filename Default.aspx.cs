@@ -71,7 +71,8 @@ namespace EmployeeDirectory
             gvEmployee.EditIndex = -1;
 
             GridViewRow row = gvEmployee.Rows[e.RowIndex];
-            
+
+            //update the user record
             LoginService.updateUser(((TextBox)(row.Cells[2].Controls[0])).Text,
                 ((TextBox)(row.Cells[3].Controls[0])).Text,
                 long.Parse(row.Cells[1].Text),
@@ -83,21 +84,17 @@ namespace EmployeeDirectory
             search();
         }
         public void gridBinding(object sender, GridViewRowEventArgs e)
-        {
-
-            
+        {            
 
             if (!this.User.IsInRole("HR"))
             {
+                //show the command buttons if the user is in HR
                 e.Row.Cells[0].Visible = false;
             }
 
             if ((e.Row.RowType == DataControlRowType.DataRow) & !((e.Row.RowState & DataControlRowState.Edit) > 0))
             {
-                //e.Row.Cells[6].Text = SearchService.getRole(Convert.ToInt32(e.Row.Cells[6].Text));
-                //e.Row.Cells[5].Text = SearchService.getLocation(Convert.ToInt32(e.Row.Cells[5].Text));
-                //e.Row.Cells[7].Text = SearchService.getStatus(Convert.ToInt32(e.Row.Cells[7].Text));
-
+                // This is a regular non-edit data row, fill the drop down lists, but disable them
                 DropDownList ddlTLocation = (e.Row.FindControl("ddlTLocation") as DropDownList);
                 ddlTLocation.DataSource = PopulateFormService.getLocations();
                 ddlTLocation.DataValueField = "Value";
@@ -128,11 +125,11 @@ namespace EmployeeDirectory
             }
             if ((e.Row.RowState & DataControlRowState.Edit) > 0)
             {
+                //This is an editable row, do some UI cleanup, fill the drop downs, and enable them
+
                 ((TextBox)(e.Row.Cells[2].Controls[0])).Width = 100;
                 ((TextBox)(e.Row.Cells[3].Controls[0])).Width = 100;
-                ((TextBox)(e.Row.Cells[4].Controls[0])).Width = 100;
-                //((TextBox)(e.Row.Cells[5].Controls[0])).Text = SearchService.getLocation(Convert.ToInt32(((TextBox)(e.Row.Cells[5].Controls[0])).Text));
-                //((TextBox)(e.Row.Cells[7].Controls[0])).Text = SearchService.getStatus(Convert.ToInt32(((TextBox)(e.Row.Cells[7].Controls[0])).Text));                
+                ((TextBox)(e.Row.Cells[4].Controls[0])).Width = 100;               
 
                 DropDownList ddlTLocation = (e.Row.FindControl("ddlTLocation") as DropDownList);
                 ddlTLocation.DataSource = PopulateFormService.getLocations();
@@ -165,6 +162,9 @@ namespace EmployeeDirectory
         }
         protected void search()
         {
+
+            //gets data for the grid view
+
             long empID = 0;
             if (!string.IsNullOrEmpty(txtEmpId.Text))
                 empID = long.Parse(txtEmpId.Text);

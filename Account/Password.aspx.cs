@@ -18,6 +18,8 @@ namespace EmployeeDirectory.Account
 
         protected void CreatePassword(object sender, EventArgs e)
         {
+            //saves the password for the user
+
             User currentUser = (User)Session["User"];
             LoginService.UpdatePassword(txtPassword.Text, currentUser.Employee_Id);
             pnlForm.Visible = false;
